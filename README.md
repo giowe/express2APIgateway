@@ -21,10 +21,41 @@ as if API Gateway was setted in mode proxy+
 You can install express2apigateway running:  
 ``$ npm install express2apigateway``
 
+use it in your code:
 ```js
 const express2apigateway = require('express2apigateway');
-const request = express2apigateway(req);
+const request = express2apigateway(req,[integration]);
 ```
+###Integrations
 
+You can pass an object like this one as integration: 
+```
+{
+  'resource': '/{proxy+}',
+  'stageVariables': 'stageVariables',
+  'requestContext': {
+    'accountId': '666666666666',
+    'resourceId': 'rrrrrr'        
+    'stage': 'prod',
+    'requestId': 'cead6d99-9560-11e6-9d3a-dbcbabbee3bb',
+    'identity': {
+      'cognitoIdentityPoolId': null,
+      'accountId': null,
+      'cognitoIdentityId': null,
+      'caller': null,
+      'apiKey': null,
+      'sourceIp': '66.66.66.66',
+      'cognitoAuthenticationType': null,
+      'cognitoAuthenticationProvider': null,
+      'userArn': null,
+      'userAgent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36',
+      'user': null
+    },
+    'resourcePath': '/{proxy+}',
+    'httpMethod': 'GET',
+    'apiId': 'xxxxxxxxxx'
+  }
+}
+```
 ## License
 MIT
