@@ -1,26 +1,21 @@
-/**
- * Created by zanni on 21/07/17.
- */
 'use strict';
 
-module.exports = (req, integrations) => {
-  const {method, params, query, body, headers} = req;
+module.exports = (req) => {
+  const { method, params: [path], query, body, headers } = req;
+
   return {
-    'resource': integrations.resource || '/{proxy+}',
-    'path': params[0],
-    'httpMethod': method,
-    'headers': Object.assign({'X-Amz-Cf-Id': '66666666666666_666666666666666666_x_6666666666666666666',
-    'X-Forwarded-For': '66.66.66.66, 205.251.208.12',
-    'X-Forwarded-Port': '443',
-    'X-Forwarded-Proto': 'https'}, headers),
-    'queryStringParameters': query,
-    'pathParameters': {
-      'proxy': 'tests/xxxxx'
+    resource: '/{proxy+}',
+    path,
+    httpMethod: method,
+    headers,
+    queryStringParameters: query,
+    pathParameters: {
+      proxy: path
     },
-    'stageVariables': integrations.stageVariables || process.env.NODE_ENV,
-    'requestContext': Object.assign({
+    stageVariables: process.env.NODE_ENV,
+    requestContext: {
       'accountId': '666666666666',
-      'resourceId': 'rrrrrr',
+      'resourceId': 'resId123',
       'stage': 'prod',
       'requestId': 'cead6d99-9560-11e6-9d3a-dbcbabbee3bb',
       'identity': {
@@ -37,9 +32,10 @@ module.exports = (req, integrations) => {
         'user': null
       },
       'resourcePath': '/{proxy+}',
-      'httpMethod': 'GET',
+      'httpMethod': method,
       'apiId': 'xxxxxxxxxx'
-    }, integrations.requestContext),
-    'body': body
+    },
+    body,
+    isBase64Encoded: false
   };
 };
