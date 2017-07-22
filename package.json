@@ -1,6 +1,6 @@
 {
   "name": "express2apigateway",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "express2apigateway is a module that given an Express `req` object returns an API Gateway {proxy+} request",
   "main": "main.js",
   "repository": {

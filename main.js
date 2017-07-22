@@ -1,8 +1,8 @@
 'use strict';
 
 module.exports = (req) => {
-  const { method, params: [path], query, body, headers } = req;
-
+  const { method, params, query, body, headers } = req;
+  const path = params[0];
   return {
     resource: '/{proxy+}',
     path,
